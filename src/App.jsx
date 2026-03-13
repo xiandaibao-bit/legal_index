@@ -689,7 +689,7 @@ export default function App() {
                   color: active ? col : C.dim,
                   fontWeight: active ? 700 : 400,
                   cursor:"pointer", transition:"all 0.15s",
-                }}>{flag}</button>
+                }}>{flag+" "+name}</button>
               );
             })}
           </div>
