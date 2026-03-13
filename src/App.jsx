@@ -656,7 +656,7 @@ export default function App() {
         </div>
 
         {/* Controls */}
-        <div style={{ display:"flex", gap:20, marginBottom:18, flexWrap:"wrap", alignItems:"center" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16, marginBottom:18 }}>
           {/* Domain filter */}
           <div style={{ display:"flex", gap:5, alignItems:"center" }}>
             <span style={{ fontSize:12, color:C.dim, marginRight:2 }}>领域：</span>
@@ -677,19 +677,19 @@ export default function App() {
           </div>
           {/* Country picker */}
           <div style={{ display:"flex", gap:5, alignItems:"center" }}>
-            <span style={{ fontSize:12, color:C.dim, marginRight:2 }}>右侧国家：</span>
+            <span style={{ fontSize:12, color:C.dim, marginRight:2 }}>国家：</span>
             {COUNTRIES.map(({ key, flag, name }) => {
               const active = country === key;
               const col = dc(key);
               return (
                 <button key={key} onClick={() => { setCountry(key); setOpenId(null); }} style={{
-                  padding:"4px 10px", borderRadius:5, fontSize:13,
+                  padding:"4px 10px", borderRadius:5, fontSize:16,
                   border:"1px solid "+(active ? col : C.border),
                   background: active ? col+"22" : "transparent",
                   color: active ? col : C.dim,
                   fontWeight: active ? 700 : 400,
                   cursor:"pointer", transition:"all 0.15s",
-                }}>{flag+" "+name}</button>
+                }}>{flag}</button>
               );
             })}
           </div>
