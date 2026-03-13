@@ -58,10 +58,10 @@ const EU_LABEL = {
 };
 
 const COUNTRIES = [
-  { key:"DE", flag:"🇩🇪", name:"德国" },
-  { key:"FR", flag:"🇫🇷", name:"法国" },
-  { key:"ES", flag:"🇪🇸", name:"西班牙" },
-  { key:"UK", flag:"🇬🇧", name:"英国" },
+  { key:"DE", flagCode:"de", name:"德国" },
+  { key:"FR", flagCode:"fr", name:"法国" },
+  { key:"ES", flagCode:"es", name:"西班牙" },
+  { key:"UK", flagCode:"gb", name:"英国" },
 ];
 
 const EU = {
@@ -678,18 +678,22 @@ export default function App() {
           {/* Country picker */}
           <div style={{ display:"flex", gap:5, alignItems:"center" }}>
             <span style={{ fontSize:12, color:C.dim, marginRight:2 }}>国家：</span>
-            {COUNTRIES.map(({ key, flag, name }) => {
+            {COUNTRIES.map(({ key, flagCode, name }) => {
               const active = country === key;
               const col = dc(key);
               return (
                 <button key={key} onClick={() => { setCountry(key); setOpenId(null); }} style={{
-                  padding:"4px 10px", borderRadius:5, fontSize:16,
+                  padding:"4px 10px", borderRadius:5, fontSize:13,
                   border:"1px solid "+(active ? col : C.border),
                   background: active ? col+"22" : "transparent",
                   color: active ? col : C.dim,
                   fontWeight: active ? 700 : 400,
                   cursor:"pointer", transition:"all 0.15s",
-                }}>{flag+" "+name}</button>
+                  display:"flex", alignItems:"center", gap:5,
+                }}>
+                  <img src={`https://flagcdn.com/w20/${flagCode}.png`} width="20" height="14" style={{ borderRadius:2, display:"block" }} />
+                  {name}
+                </button>
               );
             })}
           </div>
@@ -737,8 +741,9 @@ export default function App() {
             <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:10 }}>
               <div style={{ width:4, height:32, background:dc(country), borderRadius:2 }}/>
               <div>
-                <div style={{ fontSize:15, fontWeight:800, color:dc(country) }}>
-                  {ctry.flag+" "+ctry.name+" 国内法"}
+                <div style={{ fontSize:15, fontWeight:800, color:dc(country), display:"flex", alignItems:"center", gap:6 }}>
+                  <img src={`https://flagcdn.com/w20/${COUNTRIES.find(c=>c.key===country).flagCode}.png`} width="20" height="14" style={{ borderRadius:2 }} />
+                  {ctry.name+" 国内法"}
                 </div>
                 <div style={{ fontSize:12, color:C.dim }}>{"国内转化立法 · "+ctryCount+" 项"}</div>
               </div>
